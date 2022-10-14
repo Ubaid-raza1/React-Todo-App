@@ -1,0 +1,21 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    background-color: #000;
+    padding: 10px;
+}
+
+.UserName {
+    color: white;
+    font-size: 24px;
+    display: flex;
+}
+.UserBtn{
+    border: none;
+}
+.Head{
+    color: #ccc;
+    font-size: 24px;
+    text-align: center;
+}

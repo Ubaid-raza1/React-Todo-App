@@ -1,0 +1,42 @@
+.signup {
+    background-color: #ccc;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 16px;
+}
+
+.inp {
+    margin: 10px 0px;
+    width: 100%;
+}
+
+#fullWidth {
+    padding: 14px 16px;
+}
+
+.form {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    width: 50%;
+    background-color: #ccc;
+}
+
+.Link-Header {
+    margin: 10px 0px;
+    font-size: 18px;
+    word-break: break-all
+}
+
+.link-H {
+    text-decoration: none;
+    color: red;
+    margin: 0px 5px;
+}
+.head-l-s{
+    font-size: 30px;
+    word-break: break-all
+}
