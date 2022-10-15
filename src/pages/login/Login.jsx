@@ -4,6 +4,8 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import InputFields from "../../Components/InputFields/InputFields";
 import SButton from "../../Components/Button/SButton";
 import Swal from "sweetalert2";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -28,7 +30,7 @@ const Login = () => {
 
         Swal.fire("Sorry!", errorCode, "warning");
         console.log(errorMessage);
-        setLoading(false);
+        setLoading(true);
       });
     setLoading(false);
   };
@@ -55,6 +57,7 @@ const Login = () => {
           <SButton
             Type={"submit"}
             Varaint={"contained"}
+      
             value="Sign In"
             disabled={!data.email.trim() || !data.password.trim()}
             loading={loading}

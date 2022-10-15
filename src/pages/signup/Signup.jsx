@@ -41,7 +41,7 @@ const Signup = () => {
         Swal.fire("Sorry!", errorCode, "warning");
 
         console.log(errorMessage);
-        setLoading(false);
+        setLoading(true);
         // ..
       });
     setLoading(false);
