@@ -41,14 +41,18 @@ const Navbar = ({ SignOut, UserUid }) => {
             : `Hi ! ${User.Fname + " " + User.Lname}`}
         </p>
         <p className="Head">WellCome To Todo App</p>
-        <SButton
-          onClick={SignOut}
-          Varaint={"contained"}
-          color="error"
-          value="SignOut"
-          startIcon={<LogoutIcon />}
-          loading={loading}
-        />
+        <div>
+          <LogoutIcon className="signOut-Icon" onClick={SignOut} />
+          <SButton
+            onClick={SignOut}
+            Varaint={"contained"}
+            color="error"
+            value="SignOut"
+            startIcon={<LogoutIcon />}
+            id="signOut-btn"
+            loading={loading}
+          />
+        </div>
       </nav>
     </div>
   );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import InputFields from "../../Components/InputFields/InputFields";
 import SButton from "../../Components/Button/SButton";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -16,13 +17,16 @@ const Login = () => {
         // Signed in
         setLoading(false);
         const user = userCredential.user.uid;
-
+        if (user) {
+          Swal.fire("Good Job!", "You are Sign In Successfully", "success");
+        }
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
+
+        Swal.fire("Sorry!", errorCode, "warning");
         console.log(errorMessage);
         setLoading(false);
       });
@@ -52,6 +56,7 @@ const Login = () => {
             Type={"submit"}
             Varaint={"contained"}
             value="Sign In"
+            disabled={!data.email.trim() || !data.password.trim()}
             loading={loading}
           />
         </form>

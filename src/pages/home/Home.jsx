@@ -24,6 +24,7 @@ import InputFields from "../../Components/InputFields/InputFields";
 import SButton from "../../Components/Button/SButton";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [value, setValue] = useState();
@@ -117,13 +118,15 @@ const Home = () => {
 
   const SignOut = async () => {
     await signOut(auth)
-      .then(() => {
+      .then((res) => {
+        Swal.fire("SignOut!", "SuccessFull", "info");
+
         dispatch({ type: REMOVE_ALL, payload: [] });
         dispatch({ type: USER_UID, payload: false });
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire("Sorry!", error.code, "warning");
         setLoading(false);
       });
     setLoading(false);
@@ -207,7 +210,7 @@ const Home = () => {
                 <div className="list">
                   <h3 id="list">{ele}</h3>
                 </div>
-                <span>
+                <span className="under-btn">
                   <IconButton
                     aria-label="delete"
                     size="large"

@@ -11,11 +11,32 @@
     font-size: 24px;
     display: flex;
 }
-.UserBtn{
+
+.UserBtn {
     border: none;
 }
-.Head{
+
+.Head {
     color: #ccc;
     font-size: 24px;
     text-align: center;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .Head {
+        display: none;
+    }
+
+    #signOut-btn {
+        display: none;
+    }
+
+    .signOut-Icon {
+        color: white;
+        display: flex;
+        height: 11vh;
+        align-items: center;
+    }
 }

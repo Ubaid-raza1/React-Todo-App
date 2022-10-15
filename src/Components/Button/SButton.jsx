@@ -13,6 +13,7 @@ const SButton = ({
   startIcon,
   endIcon,
   loading,
+  
 }) => {
   return (
     <>
@@ -28,7 +29,6 @@ const SButton = ({
         endIcon={endIcon}
       >
         {`${loading ? value : "||||||"}`}
-        {/* {value} */}
       </Button>
     </>
   );

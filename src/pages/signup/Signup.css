@@ -36,7 +36,28 @@
     color: red;
     margin: 0px 5px;
 }
-.head-l-s{
+
+.head-l-s {
     font-size: 30px;
     word-break: break-all
+}
+
+/* media query */
+
+@media only screen and (max-width: 700px) {
+    .form {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:860px) {
+    .head-l-s {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:319px) {
+    .head-l-s {
+        font-size: 15px;
+    }
 }

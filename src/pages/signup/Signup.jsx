@@ -6,6 +6,7 @@ import { Database } from "../../firebase/Firebase";
 import { Link } from "react-router-dom";
 import InputFields from "../../Components/InputFields/InputFields";
 import SButton from "../../Components/Button/SButton";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const Collection = collection(Database, "UserData");
@@ -30,13 +31,15 @@ const Signup = () => {
             LName: data.lName,
             Email: data.email,
           });
+          Swal.fire("Good!", "Account is Created Successfull", "success");
         }
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
+        Swal.fire("Sorry!", errorCode, "warning");
+
         console.log(errorMessage);
         setLoading(false);
         // ..
@@ -81,6 +84,12 @@ const Signup = () => {
             Type={"submit"}
             Varaint={"contained"}
             loading={loading}
+            disabled={
+              !data.fName.trim() ||
+              !data.lName.trim() ||
+              !data.email.trim() ||
+              !data.password.trim()
+            }
             value="Signup"
           />
         </form>
