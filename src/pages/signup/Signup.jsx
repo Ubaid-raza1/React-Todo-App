@@ -21,13 +21,14 @@ const Signup = () => {
   const signupHandler = (event) => {
     event.preventDefault();
     const auth = getAuth();
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (data.fName.length >= 15 || data.lName.length >= 15) {
       Swal.fire( "Length less than 15 or equal");
     } else if (data.email.length >= 50) {
       Swal.fire( "Email Length less than 50 or equal");
     } else if (data.password.length > 50) {
       Swal.fire( "Password Length less than 50 or equal");
-    } else {
+    } else if(regex.test(data.email)) {
       createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(async (userCredential) => {
           // Signed in
@@ -53,6 +54,8 @@ const Signup = () => {
           // ..
         });
       setLoading(false);
+    }else if(!regex.test(data.email) && data.email !== ""){
+      Swal.fire("Invalid Email special Character missing ")
     }
   };
   return (
@@ -78,7 +81,7 @@ const Signup = () => {
             value={data.email}
             Type={"email"}
             onChange={(e) => setData({ ...data, email: e.target.value })}
-            Required
+            
           />
 
           <InputFields

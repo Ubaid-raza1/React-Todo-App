@@ -4,7 +4,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import InputFields from "../../Components/InputFields/InputFields";
 import SButton from "../../Components/Button/SButton";
 import Swal from "sweetalert2";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -13,11 +12,12 @@ const Login = () => {
   const loginHandler = (event) => {
     event.preventDefault();
     const auth = getAuth();
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (data.email.length > 50) {
       Swal.fire("Email Length less than 50 or equal");
     } else if (data.password.length > 50) {
       Swal.fire("Password Length less than 50 or equal");
-    } else {
+    } else if (regex.test(data.email)) {
       signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
           // Signed in
@@ -37,6 +37,8 @@ const Login = () => {
           setLoading(true);
         });
       setLoading(false);
+    } else if (!regex.test(data.email) && data.email !== "") {
+      Swal.fire("Invalid Email special Character missing ");
     }
   };
 
