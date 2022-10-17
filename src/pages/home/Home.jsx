@@ -85,7 +85,7 @@ const Home = () => {
     setIndex();
     setToggleBtn(false);
     setHidden(true);
-    setLoading(false);
+    setLoading(true);
   };
 
   const Remove = () => {
