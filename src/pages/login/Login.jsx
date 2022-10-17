@@ -6,7 +6,6 @@ import SButton from "../../Components/Button/SButton";
 import Swal from "sweetalert2";
 import CircularProgress from "@mui/material/CircularProgress";
 
-
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(true);
@@ -14,25 +13,31 @@ const Login = () => {
   const loginHandler = (event) => {
     event.preventDefault();
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        // Signed in
-        setLoading(false);
-        const user = userCredential.user.uid;
-        if (user) {
-          Swal.fire("Good Job!", "You are Sign In Successfully", "success");
-        }
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+    if (data.email.length > 50) {
+      Swal.fire("Email Length less than 50 or equal");
+    } else if (data.password.length > 50) {
+      Swal.fire("Password Length less than 50 or equal");
+    } else {
+      signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((userCredential) => {
+          // Signed in
+          setLoading(false);
+          const user = userCredential.user.uid;
+          if (user) {
+            Swal.fire("Good Job!", "You are Sign In Successfully", "success");
+          }
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
 
-        Swal.fire("Sorry!", errorCode, "warning");
-        console.log(errorMessage);
-        setLoading(true);
-      });
-    setLoading(false);
+          Swal.fire("Sorry!", errorCode, "warning");
+          console.log(errorMessage);
+          setLoading(true);
+        });
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,7 +62,6 @@ const Login = () => {
           <SButton
             Type={"submit"}
             Varaint={"contained"}
-      
             value="Sign In"
             disabled={!data.email.trim() || !data.password.trim()}
             loading={loading}

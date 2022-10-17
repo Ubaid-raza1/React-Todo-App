@@ -17,34 +17,43 @@ const Signup = () => {
     password: "",
   });
   const [loading, setLoading] = useState(true);
+
   const signupHandler = (event) => {
     event.preventDefault();
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(async (userCredential) => {
-        // Signed in
-        setLoading(false);
-        const uid = userCredential.user.uid;
-        if (uid) {
-          await setDoc(doc(Collection, uid), {
-            FName: data.fName,
-            LName: data.lName,
-            Email: data.email,
-          });
-          Swal.fire("Good!", "Account is Created Successfull", "success");
-        }
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        Swal.fire("Sorry!", errorCode, "warning");
+    if (data.fName.length >= 15 || data.lName.length >= 15) {
+      Swal.fire( "Length less than 15 or equal");
+    } else if (data.email.length >= 50) {
+      Swal.fire( "Email Length less than 50 or equal");
+    } else if (data.password.length > 50) {
+      Swal.fire( "Password Length less than 50 or equal");
+    } else {
+      createUserWithEmailAndPassword(auth, data.email, data.password)
+        .then(async (userCredential) => {
+          // Signed in
+          setLoading(false);
+          const uid = userCredential.user.uid;
+          if (uid) {
+            Swal.fire("Good!", "Account is Created Successfull", "success");
+            await setDoc(doc(Collection, uid), {
+              FName: data.fName,
+              LName: data.lName,
+              Email: data.email,
+            });
+          }
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          Swal.fire("Sorry!", errorCode, "warning");
 
-        console.log(errorMessage);
-        setLoading(true);
-        // ..
-      });
-    setLoading(false);
+          console.log(errorMessage);
+          setLoading(true);
+          // ..
+        });
+      setLoading(false);
+    }
   };
   return (
     <div className="signup">
